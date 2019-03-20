@@ -10,6 +10,7 @@ import static org.lwjgl.glfw.GLFW.*;
 
 public class DummyGame implements IGameLogic {
 
+    private final DataTransfer dt;
     private int displxInc = 0;
 
     private int displyInc = 0;
@@ -27,8 +28,9 @@ public class DummyGame implements IGameLogic {
 
     private GameItem[] gameItems;
 
-    public DummyGame() {
+    public DummyGame(DataTransfer dt) {
         renderer = new Renderer();
+        this.dt = dt;
     }
 
     @Override

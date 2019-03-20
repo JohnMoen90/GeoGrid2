@@ -1,5 +1,9 @@
 package GeometryShader.engine;
 
+import GeometryShader.game.DataTransfer;
+
+import javax.xml.crypto.Data;
+
 public class GameEngine implements Runnable {
 
     public static final int TARGET_FPS = 75;
