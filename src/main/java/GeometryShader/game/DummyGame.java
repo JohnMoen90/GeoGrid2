@@ -1,5 +1,6 @@
 package GeometryShader.game;
 
+import GeometryShader.engine.graph.MeshUtils;
 import org.joml.Vector3f;
 import GeometryShader.engine.GameItem;
 import GeometryShader.engine.IGameLogic;
@@ -11,6 +12,7 @@ import static org.lwjgl.glfw.GLFW.*;
 public class DummyGame implements IGameLogic {
 
     private final DataTransfer dt;
+
     private int displxInc = 0;
 
     private int displyInc = 0;
@@ -18,6 +20,8 @@ public class DummyGame implements IGameLogic {
     private int displzInc = 0;
 
     private int scaleInc = 0;
+
+    private MeshUtils meshUtils;
 
     int numTilesX;
     int numTilesY;
@@ -40,6 +44,8 @@ public class DummyGame implements IGameLogic {
         numTilesX = 1201;
         numTilesY = 1201;
 
+        meshUtils = new MeshUtils(numTilesX, numTilesY);
+
         tileSize = (float) 2 / numTilesX;
 
         // Create the Mesh
@@ -50,70 +56,15 @@ public class DummyGame implements IGameLogic {
 //                -0.5f, -0.5f  // bottom-left
 //        };
 
-        float[] positions = createVertexArray();
-        float[] colours = createColorArray();
+        float[] positions = meshUtils.createVertexArray();
+        float[] colours = meshUtils.createColorArray();
 
 
-        int[] indices = createIndiceArray();
+        int[] indices = meshUtils.createIndiceArray();
         Mesh mesh = new Mesh(positions, colours, indices, tileSize);
         GameItem gameItem = new GameItem(mesh);
         gameItem.setPosition(0, 0, -2);
         gameItems = new GameItem[] { gameItem };
-    }
-
-    private float[] createColorArray(){
-    int index = 0;
-        float[] colorArray = new float[numTilesY * numTilesX * 3];
-        float r = (float) Math.random();
-        float b = (float) Math.random();
-        float g = (float) Math.random();
-        for (int i = 0; i < colorArray.length; i = i + 3) {
-            colorArray[index++] = r;
-            colorArray[index++] = b;
-            colorArray[index++] = g;
-        }
-        return colorArray;
-    }
-
-
-    private int[] createIndiceArray() {
-        int [] indiceArray = new int[numTilesX * numTilesY];
-
-        for (int i = 0; i < indiceArray.length; i++) {
-            indiceArray[i] = i;
-        }
-//        for (int vert : indiceArray) {
-//            System.out.println(vert);
-//        }
-        return indiceArray;
-    }
-
-    private float[] createVertexArray(){
-
-        float[] gridArray = new float[numTilesX * numTilesY * 2];
-
-        float tileW = (float) 2 / numTilesX;
-        float tileH = (float) 2 / numTilesY;
-
-        int index = 0;
-
-        float YCursor = 1;
-        YCursor -= tileH /2;
-        for (int y = 0; y < numTilesY; y++) {
-            float xCursor = -1;
-            xCursor += tileW / 2;
-            for (int x = 0; x < numTilesX * 2; x = x + 2) {
-                gridArray[index++] = xCursor;
-                gridArray[index++] = YCursor;
-                xCursor += tileW;
-            }
-            YCursor -= tileH;
-
-        }
-//        for (float vert : gridArray) {
-//            System.out.println(vert);
-//        }
-        return gridArray;
     }
 
 
