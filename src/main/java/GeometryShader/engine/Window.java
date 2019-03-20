@@ -22,6 +22,8 @@ public class Window {
 
     private boolean vSync;
 
+    private MouseHandler mouseCallback;
+
     public Window(String title, int width, int height, boolean vSync) {
         this.title = title;
         this.width = width;
@@ -60,6 +62,9 @@ public class Window {
             this.height = height;
             this.setResized(true);
         });
+
+
+        glfwSetCursorPosCallback(windowHandle, mouseCallback = new MouseHandler());
 
         // Setup a key callback. It will be called every time a key is pressed, repeated or released.
         glfwSetKeyCallback(windowHandle, (window, key, scancode, action, mods) -> {
@@ -137,5 +142,9 @@ public class Window {
     public void update() {
         glfwSwapBuffers(windowHandle);
         glfwPollEvents();
+    }
+
+    public MouseHandler getMouseHandler() {
+        return mouseCallback;
     }
 }

@@ -8,6 +8,8 @@ import GeometryShader.engine.graph.ShaderProgram;
 import GeometryShader.engine.graph.Transformation;
 
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL13.GL_TEXTURE0;
+import static org.lwjgl.opengl.GL13.glActiveTexture;
 
 public class Renderer {
 
@@ -31,15 +33,18 @@ public class Renderer {
     public void init(Window window) throws Exception {
         // Create shader
         shaderProgram = new ShaderProgram();
-        shaderProgram.createVertexShader(Utils.loadResource("/vertex.vs"));
-        shaderProgram.createFragmentShader(Utils.loadResource("/fragment.fs"));
-        shaderProgram.createGeometryShader(Utils.loadResource("/geometry.geo"));
+        shaderProgram.createVertexShader(Utils.loadResource("/shaders/vertex.vs"));
+        shaderProgram.createFragmentShader(Utils.loadResource("/shaders/fragment.fs"));
+        shaderProgram.createGeometryShader(Utils.loadResource("/shaders/geometry.geo"));
         shaderProgram.link();
         
         // Create uniforms for world and projection matrices
-//        shaderProgram.createUniform("projectionMatrix");
-//        shaderProgram.createUniform("worldMatrix");
-        
+        shaderProgram.createUniform("projectionMatrix");
+        shaderProgram.createUniform("worldMatrix");
+        shaderProgram.createUniform("tileSize");
+//        shaderProgram.createUniform("mousePos");
+//        shaderProgram.createUniform("maxHgt");
+
         window.setClearColor(0.0f, 0.0f, 0.0f, 0.0f);
     }
 
@@ -56,19 +61,30 @@ public class Renderer {
         }
 
         shaderProgram.bind();
+
+//        shaderProgram.setUniform("texture_sampler", 0);
+
+//        // Activate firs texture bank
+//        glActiveTexture(GL_TEXTURE0);
+//        // Bind the texture
+//        glBindTexture(GL_TEXTURE_2D, gameItems[0].getMesh().getTextureId());
         
         // Update projection Matrix
         Matrix4f projectionMatrix = transformation.getProjectionMatrix(FOV, window.getWidth(), window.getHeight(), Z_NEAR, Z_FAR);
-//        shaderProgram.setUniform("projectionMatrix", projectionMatrix);
-        
+        shaderProgram.setUniform("projectionMatrix", projectionMatrix);
+//        shaderProgram.setUniform("maxHgt", (float) gameItems[0].getMesh().getMaxHgt());
+//        shaderProgram.setUniform("mousePos", window.getMouseHandler().getxPos(), window.getMouseHandler().getyPos());
+
         // Render each gameItem
         for(GameItem gameItem : gameItems) {
+            shaderProgram.setUniform("tileSize", gameItem.getScale() * gameItems[0].getMesh().getTileSize());
+
             // Set world matrix for this item
             Matrix4f worldMatrix = transformation.getWorldMatrix(
                     gameItem.getPosition(),
                     gameItem.getRotation(),
                     gameItem.getScale());
-//            shaderProgram.setUniform("worldMatrix", worldMatrix);
+            shaderProgram.setUniform("worldMatrix", worldMatrix);
             // Render the mes for this game item
             gameItem.getMesh().render();
         }

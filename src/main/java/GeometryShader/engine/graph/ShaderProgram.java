@@ -45,6 +45,21 @@ public class ShaderProgram {
         }
     }
 
+    public void setUniform(String uniformName, int value) {
+        glUniform1i(uniforms.get(uniformName), value);
+    }
+
+    public void setUniform(String uniformName, float value) {
+
+            // Dump the matrix into a float buffer
+            glUniform1f(uniforms.get(uniformName), value);
+
+    }
+
+    public void setUniform(String uniformName, double xpos, double ypos) {
+        glUniform2f(uniforms.get(uniformName), (float) xpos, (float) ypos);
+    }
+
     public void createVertexShader(String shaderCode) throws Exception {
         vertexShaderId = createShader(shaderCode, GL_VERTEX_SHADER);
     }
