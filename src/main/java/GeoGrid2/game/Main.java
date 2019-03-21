@@ -1,9 +1,7 @@
-package GeometryShader.game;
+package GeoGrid2.game;
 
-import GeometryShader.engine.GameEngine;
-import GeometryShader.engine.IGameLogic;
-
-import javax.xml.crypto.Data;
+import GeoGrid2.engine.GameEngine;
+import GeoGrid2.engine.IGameLogic;
 
 public class Main {
  

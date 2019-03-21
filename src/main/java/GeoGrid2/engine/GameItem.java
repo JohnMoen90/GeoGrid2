@@ -1,7 +1,7 @@
-package GeometryShader.engine;
+package GeoGrid2.engine;
 
 import org.joml.Vector3f;
-import GeometryShader.engine.graph.Mesh;
+import GeoGrid2.engine.graph.Mesh;
 
 public class GameItem {
 

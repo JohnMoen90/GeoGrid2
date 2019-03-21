@@ -1,15 +1,13 @@
-package GeometryShader.game;
+package GeoGrid2.game;
 
 import org.joml.Matrix4f;
-import GeometryShader.engine.GameItem;
-import GeometryShader.engine.Utils;
-import GeometryShader.engine.Window;
-import GeometryShader.engine.graph.ShaderProgram;
-import GeometryShader.engine.graph.Transformation;
+import GeoGrid2.engine.GameItem;
+import GeoGrid2.engine.Utils;
+import GeoGrid2.engine.Window;
+import GeoGrid2.engine.graph.ShaderProgram;
+import GeoGrid2.engine.graph.Transformation;
 
 import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.GL13.GL_TEXTURE0;
-import static org.lwjgl.opengl.GL13.glActiveTexture;
 
 public class Renderer {
 

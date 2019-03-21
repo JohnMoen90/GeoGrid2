@@ -1,4 +1,4 @@
-package GeometryShader.engine;
+package GeoGrid2.engine;
 
 public interface IGameLogic {
 

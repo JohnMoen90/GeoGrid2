@@ -1,6 +1,6 @@
-package GeometryShader.game;
+package GeoGrid2.game;
 
-import GeometryShader.engine.MapTile;
+import GeoGrid2.engine.MapTile;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

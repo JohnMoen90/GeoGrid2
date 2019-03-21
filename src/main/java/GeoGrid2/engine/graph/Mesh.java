@@ -1,6 +1,6 @@
-package GeometryShader.engine.graph;
+package GeoGrid2.engine.graph;
 
-import GeometryShader.engine.HgtManager;
+import GeoGrid2.engine.HgtManager;
 import org.lwjgl.system.MemoryUtil;
 
 import java.math.RoundingMode;
@@ -11,8 +11,6 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.lwjgl.opengl.GL11.GL_FLOAT;
-import static org.lwjgl.opengl.GL11.GL_TRIANGLES;
-import static org.lwjgl.opengl.GL11.GL_UNSIGNED_INT;
 import static org.lwjgl.opengl.GL11.glDrawElements;
 import static org.lwjgl.opengl.GL15.GL_ARRAY_BUFFER;
 import static org.lwjgl.opengl.GL15.GL_ELEMENT_ARRAY_BUFFER;

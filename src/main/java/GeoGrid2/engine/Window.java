@@ -1,4 +1,4 @@
-package GeometryShader.engine;
+package GeoGrid2.engine;
 
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWVidMode;

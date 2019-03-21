@@ -1,8 +1,4 @@
-package GeometryShader.engine;
-
-import GeometryShader.game.DataTransfer;
-
-import javax.xml.crypto.Data;
+package GeoGrid2.engine;
 
 public class GameEngine implements Runnable {
 

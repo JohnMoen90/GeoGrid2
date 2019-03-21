@@ -1,5 +1,4 @@
-import GeometryShader.engine.graph.MeshUtils;
-import GeometryShader.game.DummyGame;
+import GeoGrid2.engine.graph.MeshUtils;
 import org.junit.Assert;
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package GeometryShader.engine.graph;
+package GeoGrid2.engine.graph;
 
 import org.lwjgl.BufferUtils;
 

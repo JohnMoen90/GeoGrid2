@@ -1,11 +1,11 @@
-package GeometryShader.game;
+package GeoGrid2.game;
 
-import GeometryShader.engine.graph.MeshUtils;
+import GeoGrid2.engine.graph.MeshUtils;
 import org.joml.Vector3f;
-import GeometryShader.engine.GameItem;
-import GeometryShader.engine.IGameLogic;
-import GeometryShader.engine.Window;
-import GeometryShader.engine.graph.Mesh;
+import GeoGrid2.engine.GameItem;
+import GeoGrid2.engine.IGameLogic;
+import GeoGrid2.engine.Window;
+import GeoGrid2.engine.graph.Mesh;
 
 import static org.lwjgl.glfw.GLFW.*;
 

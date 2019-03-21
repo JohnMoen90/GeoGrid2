@@ -1,4 +1,4 @@
-package GeometryShader.engine;
+package GeoGrid2.engine;
 
 import java.io.InputStream;
 import java.util.Scanner;

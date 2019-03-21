@@ -1,4 +1,4 @@
-package GeometryShader.game;
+package GeoGrid2.game;
 
 import javax.swing.*;
 import java.awt.event.*;
