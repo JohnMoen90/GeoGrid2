@@ -14,6 +14,15 @@ import static org.lwjgl.opengl.GL12.glTexImage3D;
 import static org.lwjgl.opengl.GL30.GL_TEXTURE_2D_ARRAY;
 import static org.lwjgl.opengl.GL30.glGenerateMipmap;
 
+
+/**
+ * Currently this does nothing!!
+ * I had it working like a charm before I switched to the geometry shader model, but currently
+ * it'll just output random textures onto random tiles and is not so focused on my goals for
+ * this project
+ *
+ */
+
 public class Texture {
 
     private int id;

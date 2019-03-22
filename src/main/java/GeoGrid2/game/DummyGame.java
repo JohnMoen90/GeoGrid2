@@ -1,8 +1,8 @@
 package GeoGrid2.game;
 
+import GeoGrid2.engine.GridItem;
 import GeoGrid2.engine.graph.MeshUtils;
 import org.joml.Vector3f;
-import GeoGrid2.engine.GameItem;
 import GeoGrid2.engine.IGameLogic;
 import GeoGrid2.engine.Window;
 import GeoGrid2.engine.graph.Mesh;
@@ -30,7 +30,7 @@ public class DummyGame implements IGameLogic {
 
     private final Renderer renderer;
 
-    private GameItem[] gameItems;
+    private GridItem[] gridItems;
 
     public DummyGame(DataTransfer dt) {
         renderer = new Renderer();
@@ -41,8 +41,8 @@ public class DummyGame implements IGameLogic {
     public void init(Window window) throws Exception {
         renderer.init(window);
 
-        numTilesX = 1201;
-        numTilesY = 1201;
+        numTilesX = 3601;
+        numTilesY = 3601;
 
         meshUtils = new MeshUtils(numTilesX, numTilesY);
 
@@ -58,13 +58,12 @@ public class DummyGame implements IGameLogic {
 
         float[] positions = meshUtils.createVertexArray();
         float[] colours = meshUtils.createColorArray();
-
-
         int[] indices = meshUtils.createIndiceArray();
+
         Mesh mesh = new Mesh(positions, colours, indices, tileSize);
-        GameItem gameItem = new GameItem(mesh);
-        gameItem.setPosition(0, 0, -2);
-        gameItems = new GameItem[] { gameItem };
+        GridItem gridItem = new GridItem(mesh);
+        gridItem.setPosition(0, 0, -2);
+        gridItems = new GridItem[] {gridItem};
     }
 
 
@@ -95,41 +94,45 @@ public class DummyGame implements IGameLogic {
 
     @Override
     public void update(float interval) {
-        for (GameItem gameItem : gameItems) {
-            float scale = gameItem.getScale();
+
+
+
+
+        for (GridItem gridItem : gridItems) {
+            float scale = gridItem.getScale();
             // Update position
-            Vector3f itemPos = gameItem.getPosition();
+            Vector3f itemPos = gridItem.getPosition();
             float posx = itemPos.x + displxInc * (scale * 0.01f);
             float posy = itemPos.y + displyInc * (scale * 0.01f);
             float posz = itemPos.z + displzInc * (scale * 0.01f);
-            gameItem.setPosition(posx, posy, posz);
+            gridItem.setPosition(posx, posy, posz);
             
             // Update scale
             scale += scaleInc * (scale * 0.05f);
             if ( scale < 0 ) {
                 scale = 0;
             }
-            gameItem.setScale(scale);
+            gridItem.setScale(scale);
             
             // Update rotation angle
-//            float rotation = gameItem.getRotation().z + 1.5f;
+//            float rotation = gridItem.getRotation().z + 1.5f;
 //            if ( rotation > 360 ) {
 //                rotation = 0;
 //            }
-//            gameItem.setRotation(0, 0, rotation);
+//            gridItem.setRotation(0, 0, rotation);
         }
     }
 
     @Override
     public void render(Window window) {
-        renderer.render(window, gameItems);
+        renderer.render(window, gridItems);
     }
 
     @Override
     public void cleanup() {
         renderer.cleanup();
-        for (GameItem gameItem : gameItems) {
-            gameItem.getMesh().cleanUp();
+        for (GridItem gridItem : gridItems) {
+            gridItem.getMesh().cleanUp();
         }
     }
 

@@ -1,40 +1,43 @@
 package GeoGrid2.engine;
 
-public class GameEngine implements Runnable {
+/**
+ * This class manages the game thread, fps, and binding window with game logic
+ */
+
+public class GridEngine implements Runnable {
 
     public static final int TARGET_FPS = 75;
-
     public static final int TARGET_UPS = 30;
 
     private final Window window;
-
-    private final Thread gameLoopThread;
-
+    private final Thread geoGridLoopThread;
     private final Timer timer;
 
     private final IGameLogic gameLogic;
 
-    public GameEngine(String windowTitle, int width, int height, boolean vSync, IGameLogic gameLogic) throws Exception {
-        gameLoopThread = new Thread(this, "GAME_LOOP_THREAD");
+    public GridEngine(String windowTitle, int width, int height, boolean vSync, IGameLogic gameLogic) throws Exception {
+        geoGridLoopThread = new Thread(this, "GAME_LOOP_THREAD");
         window = new Window(windowTitle, width, height, vSync);
         this.gameLogic = gameLogic;
         timer = new Timer();
     }
 
+    // Starts the thread, runs on single thread overall for mac compatibility
     public void start() {
         String osName = System.getProperty("os.name");
         if ( osName.contains("Mac") ) {
-            gameLoopThread.run();
+            geoGridLoopThread.run();
         } else {
-            gameLoopThread.start();
+            geoGridLoopThread.start();
         }
     }
 
     @Override
+    // The main loop starts here
     public void run() {
         try {
             init();
-            gameLoop();
+            mainLoop();
         } catch (Exception excp) {
             excp.printStackTrace();
         } finally {
@@ -48,7 +51,10 @@ public class GameEngine implements Runnable {
         gameLogic.init(window);
     }
 
-    protected void gameLoop() {
+    // The main loop
+    protected void mainLoop() {
+
+        // All this is to ensure the correct target FPS and update/render sync
         float elapsedTime;
         float accumulator = 0f;
         float interval = 1f / TARGET_UPS;
@@ -60,6 +66,7 @@ public class GameEngine implements Runnable {
 
             input();
 
+            // This is what stops the loop until render time
             while (accumulator >= interval) {
                 update(interval);
                 accumulator -= interval;
@@ -77,6 +84,7 @@ public class GameEngine implements Runnable {
         gameLogic.cleanup();
     }
 
+    // This helps with screen tearing
     private void sync() {
         float loopSlot = 1f / TARGET_FPS;
         double endTime = timer.getLastLoopTime() + loopSlot;

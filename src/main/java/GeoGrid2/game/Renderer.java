@@ -1,7 +1,7 @@
 package GeoGrid2.game;
 
+import GeoGrid2.engine.GridItem;
 import org.joml.Matrix4f;
-import GeoGrid2.engine.GameItem;
 import GeoGrid2.engine.Utils;
 import GeoGrid2.engine.Window;
 import GeoGrid2.engine.graph.ShaderProgram;
@@ -50,7 +50,7 @@ public class Renderer {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     }
 
-    public void render(Window window, GameItem[] gameItems) {
+    public void render(Window window, GridItem[] gridItems) {
         clear();
 
         if ( window.isResized() ) {
@@ -65,26 +65,26 @@ public class Renderer {
 //        // Activate firs texture bank
 //        glActiveTexture(GL_TEXTURE0);
 //        // Bind the texture
-//        glBindTexture(GL_TEXTURE_2D, gameItems[0].getMesh().getTextureId());
+//        glBindTexture(GL_TEXTURE_2D, gridItems[0].getMesh().getTextureId());
         
         // Update projection Matrix
         Matrix4f projectionMatrix = transformation.getProjectionMatrix(FOV, window.getWidth(), window.getHeight(), Z_NEAR, Z_FAR);
         shaderProgram.setUniform("projectionMatrix", projectionMatrix);
-//        shaderProgram.setUniform("maxHgt", (float) gameItems[0].getMesh().getMaxHgt());
+//        shaderProgram.setUniform("maxHgt", (float) gridItems[0].getMesh().getMaxHgt());
 //        shaderProgram.setUniform("mousePos", window.getMouseHandler().getxPos(), window.getMouseHandler().getyPos());
 
         // Render each gameItem
-        for(GameItem gameItem : gameItems) {
-            shaderProgram.setUniform("tileSize", gameItem.getScale() * gameItems[0].getMesh().getTileSize());
+        for(GridItem gridItem : gridItems) {
+            shaderProgram.setUniform("tileSize", gridItem.getScale() * gridItems[0].getMesh().getTileSize());
 
             // Set world matrix for this item
             Matrix4f worldMatrix = transformation.getWorldMatrix(
-                    gameItem.getPosition(),
-                    gameItem.getRotation(),
-                    gameItem.getScale());
+                    gridItem.getPosition(),
+                    gridItem.getRotation(),
+                    gridItem.getScale());
             shaderProgram.setUniform("worldMatrix", worldMatrix);
             // Render the mes for this game item
-            gameItem.getMesh().render();
+            gridItem.getMesh().render();
         }
 
         shaderProgram.unbind();
