@@ -58,6 +58,14 @@ public class GridController implements IGridLogic {
         GridItem gridItem = new GridItem(mesh);
         gridItem.setPosition(0, 0, -2);
         gridItems = new GridItem[] {gridItem};
+
+        // Print the controls
+        System.out.println("\n-----------------------");
+        System.out.println("arrow keys : move map");
+        System.out.println("z, w : increase, decrease scale");
+        System.out.println("q, a : zoom in, zoom out scale");
+        System.out.println("esc : close window");
+        System.out.println("-----------------------");
     }
 
 

@@ -110,11 +110,11 @@ public class HgtManager {
     // Creates a url based on long / lat value
     static private void buildURL(int lg, int lt) {
 
-        filename = lg > 0 ? "N" : "S";
-        filename += Math.abs(lg);
+        filename = lt > 0 ? "N" : "S";
+        filename += Math.abs(lt);
 
-        filename += lt > 0 ? "E" : "W";
-        filename += Math.abs(lt) > 99 ? Math.abs(lt) : "0"+Math.abs(lt);
+        filename += lg > 0 ? "E" : "W";
+        filename += Math.abs(lg) > 99 ? Math.abs(lg) : "0"+Math.abs(lg);
 
         url = "https://dds.cr.usgs.gov/srtm/version2_1/SRTM3/North_America/" + filename + ".hgt.zip";
 

@@ -1,5 +1,7 @@
 package GeoGrid2.engine.graph;
 
+import java.util.Random;
+
 /**
  * This class is a toolbox for creating arrays intended to be put into VBOs
  */
@@ -15,6 +17,19 @@ public class MeshUtils {
         this.numTilesX = numTilesX;
         this.numTilesY = numTilesY;
     }
+
+    // Get random int in range for mapgen
+    public int getRandomInt(int min, int max) {
+        if (min > max ) {
+            int tempMin = min;
+            min = max;
+            max = tempMin;
+        }
+
+        return new Random().nextInt((max - min) + 1) + min;
+
+    }
+
 
     // Creates random colors for every tile
     public float[] createColorArray(){

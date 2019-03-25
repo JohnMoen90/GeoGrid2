@@ -45,6 +45,8 @@ public class Mesh {
     private int lon;
     private int lat;
 
+    private MeshUtils meshUtils;
+
     public Mesh(float[] positions, float[] colours, int[] indices, float tileSize) throws Exception{
 
         // Initialize the buffers - no need to save these
@@ -53,6 +55,9 @@ public class Mesh {
         IntBuffer indicesBuffer = null;
         IntBuffer hgtBuffer = null;
         FloatBuffer hgtColorBuffer = null;
+
+        // Init meshUtils
+        meshUtils = new MeshUtils(1201, 1201);
 
         try {
 
@@ -63,8 +68,11 @@ public class Mesh {
             vaoId = glGenVertexArrays();
             glBindVertexArray(vaoId);
 
-            lon = 38;
-            lat = -111;
+
+            lon = meshUtils.getRandomInt(-110, -120);
+            lat = meshUtils.getRandomInt(36, 48);
+            System.out.println("Longitude : W" + Math.abs(lon));
+            System.out.println("Latitude : N" + lat);
 
             // Initialize Hgt data & get the max and min height
             int[] hgtData = HgtManager.createHgtIntArray(lon, lat);
@@ -81,7 +89,10 @@ public class Mesh {
             float[] hgtColorValues = new float[1201*1201];
 
             // Set to single decimal for staggered look ------\/
-            DecimalFormat df = new DecimalFormat("####.##");
+            String format = Math.random()>.5 ? "####.##" : "####.#";
+            DecimalFormat df = new DecimalFormat(format);
+            System.out.println("Rounding : " + (format.length() == 6 ? "to the tenth (more staggered)" : "to the hundredth (more accurate)"));
+
             df.setRoundingMode(RoundingMode.HALF_DOWN);
             for (int i = 0; i < 1201; i++) {
 //                int precalcY = 100 * i;            <---To test color values ---\/
