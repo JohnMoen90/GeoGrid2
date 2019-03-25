@@ -41,8 +41,8 @@ public class DummyGame implements IGameLogic {
     public void init(Window window) throws Exception {
         renderer.init(window);
 
-        numTilesX = 3601;
-        numTilesY = 3601;
+        numTilesX = 1201;
+        numTilesY = 1201;
 
         meshUtils = new MeshUtils(numTilesX, numTilesY);
 

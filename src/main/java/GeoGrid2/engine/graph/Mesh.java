@@ -78,14 +78,14 @@ public class Mesh {
             // Calculate color values
             int counter = 0;
             int index = 0;
-            float[] hgtColorValues = new float[3601 * 3601 ];
+            float[] hgtColorValues = new float[1201*1201];
 
-            // Set to single decimal for staggered look
-            DecimalFormat df = new DecimalFormat("####.#");
+            // Set to single decimal for staggered look ------\/
+            DecimalFormat df = new DecimalFormat("####.##");
             df.setRoundingMode(RoundingMode.HALF_DOWN);
-            for (int i = 0; i < 3601; i++) {
+            for (int i = 0; i < 1201; i++) {
 //                int precalcY = 100 * i;            <---To test color values ---\/
-                for (int j = 0; j < 3601; j++) {
+                for (int j = 0; j < 1201; j++) {
 //                    System.out.printf(j==49? " %d.%.2f \n" : " %d.%.2f ",j+precalcY,levelRange(hgtData[index++], minHgt, maxHgt));
                     float tempFloat = Float.parseFloat(df.format(levelRange(hgtData[counter++],minHgt,maxHgt)));
                     hgtColorValues[index++] = tempFloat;

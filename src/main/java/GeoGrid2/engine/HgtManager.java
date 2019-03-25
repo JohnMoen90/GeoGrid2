@@ -39,7 +39,7 @@ public class HgtManager {
             unzip();
         }
 
-        int[] hgtArray = new int[3601 * 3601];    // 3arc second data are always these dimensions
+        int[] hgtArray = new int[1201 * 1201];    // 3arc second data are always these dimensions
                                                 // 1arc second would be 3 times the size
 
         // For trying to load from resources, had some strange issues so made new folder
@@ -59,17 +59,17 @@ public class HgtManager {
 
             // Write the data from buffer to array
             int index = 0;
-            for (int i = 0; i < 3601; i++) {
-                int precalcY = 3601 * i;    // Useful when wanting less than the entire array
-                for (int j = 0; j < 3601; j++) {
+            for (int i = 0; i < 1201; i++) {
+                int precalcY = 1201 * i;    // Useful when wanting less than the entire array
+                for (int j = 0; j < 1201; j++) {
 
                     // Print test
                     // System.out.printf(j==49? " %d.%d \n" : " %d.%d ",j,sb.get(j + precalcY));
-                    if (sb.get(index) == -32768) {   // Means Invalid Data
+                    if (sb.get(j + precalcY) == -32768) {   // Means Invalid Data
                         hgtArray[index++] = -10;    // Change it to -10 for my own easy reference later
                     } else {    // If data is less than 0 just make it 0
                         try {
-                            hgtArray[index++] = (int) sb.get(index) < 0 ? 0 : sb.get(index);
+                            hgtArray[index++] = (int) sb.get(j + precalcY) < 0 ? 0 : sb.get(j+precalcY);
                         } catch (Exception e) {
                             System.out.println(index);
                             e.printStackTrace();
@@ -108,7 +108,7 @@ public class HgtManager {
         filename += lt > 0 ? "E" : "W";
         filename += Math.abs(lt) > 99 ? Math.abs(lt) : "0"+Math.abs(lt);
 
-        url = "https://dds.cr.usgs.gov/srtm/version1/United_States_1arcsec/1arcsec/" + filename + ".hgt.zip";
+        url = "https://dds.cr.usgs.gov/srtm/version2_1/SRTM3/North_America/" + filename + ".hgt.zip";
 
     }
 
