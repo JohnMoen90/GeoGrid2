@@ -21,6 +21,14 @@ import java.nio.file.StandardCopyOption;
  * This class is kind of a huge mess.. but it works!
  * It pulls the data we need from offline, opens the zip it comes in,
  * and converts that data into an array
+ *
+ * Currently the url is hardcoded in, to support maps outside the us, the /North_America/ can
+ * be swapped out for other global regions (ex. /Europe/)
+ * Also, 1 arc second data can be used after the '1201' size in mesh and hgtManager are changed to
+ * 3601. I tested the 1' arc second data and it ran considerably slower. Also, although the fix
+ * would be relatively easy, the filenames for the data types are identical and cause errors when the wrong
+ * one is grabbed. I still plan to implement a database instead of this system so I decided to omit 1' arc
+ * second data for now
  */
 public class HgtManager {
 

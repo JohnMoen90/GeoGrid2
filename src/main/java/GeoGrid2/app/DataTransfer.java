@@ -1,4 +1,9 @@
-package GeoGrid2.game;
+package GeoGrid2.app;
+
+/**
+ * A class that was used to connect the information from SettingsDialog or SettingsGUI to OpenGL
+ * Not currently used
+ */
 
 public class DataTransfer {
 

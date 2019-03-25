@@ -1,5 +1,9 @@
 package GeoGrid2.engine;
 
+/**
+ * I hope to add this later for database/opengl IO, basically a data structure to represent a map tile.
+ * Not currently used
+ */
 public class MapTile {
 
     private int lon;
@@ -13,8 +17,6 @@ public class MapTile {
 
 
     public MapTile(int lon, int lat) {
-
-
 
     }
 

@@ -1,6 +1,11 @@
 package GeoGrid2.engine;
 
-public interface IGameLogic {
+/**
+ * For interfacing a program with the grid engine
+ * It is implemented by GridCOntroller
+ */
+
+public interface IGridLogic {
 
     void init(Window window) throws Exception;
     

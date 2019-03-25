@@ -3,6 +3,10 @@ package GeoGrid2.engine;
 import java.io.InputStream;
 import java.util.Scanner;
 
+/**
+ * This class helps read shader files into ShaderProgram
+ */
+
 public class Utils {
 
     public static String loadResource(String fileName) throws Exception {

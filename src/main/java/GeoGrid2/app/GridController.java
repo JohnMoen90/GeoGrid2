@@ -1,38 +1,37 @@
-package GeoGrid2.game;
+package GeoGrid2.app;
 
 import GeoGrid2.engine.GridItem;
 import GeoGrid2.engine.graph.MeshUtils;
 import org.joml.Vector3f;
-import GeoGrid2.engine.IGameLogic;
+import GeoGrid2.engine.IGridLogic;
 import GeoGrid2.engine.Window;
 import GeoGrid2.engine.graph.Mesh;
 
 import static org.lwjgl.glfw.GLFW.*;
 
-public class DummyGame implements IGameLogic {
+public class GridController implements IGridLogic {
 
     private final DataTransfer dt;
 
     private int displxInc = 0;
-
     private int displyInc = 0;
-
     private int displzInc = 0;
 
     private int scaleInc = 0;
 
     private MeshUtils meshUtils;
 
-    int numTilesX;
-    int numTilesY;
+    private int numTilesX;
+    private int numTilesY;
 
     float tileSize;
 
     private final Renderer renderer;
 
+    // A list of all items to be rendered, currently there is only one
     private GridItem[] gridItems;
 
-    public DummyGame(DataTransfer dt) {
+    public GridController(DataTransfer dt) {
         renderer = new Renderer();
         this.dt = dt;
     }
@@ -41,25 +40,20 @@ public class DummyGame implements IGameLogic {
     public void init(Window window) throws Exception {
         renderer.init(window);
 
-        numTilesX = 1201;
+        numTilesX = 1201;   // Hardcoded for 3' arc second data
         numTilesY = 1201;
 
         meshUtils = new MeshUtils(numTilesX, numTilesY);
 
+        // Normalize tile size
         tileSize = (float) 2 / numTilesX;
 
-        // Create the Mesh
-//        float[] positions = new float[]{
-//                -0.5f,  0.5f, // top-left
-//                0.5f,  0.5f, // top-right
-//                0.5f, -0.5f, // bottom-right
-//                -0.5f, -0.5f  // bottom-left
-//        };
-
+        // Create arrays for the VAO's VBOs
         float[] positions = meshUtils.createVertexArray();
-        float[] colours = meshUtils.createColorArray();
-        int[] indices = meshUtils.createIndiceArray();
+        float[] colours = meshUtils.createColorArray(); // Not used!!
+        int[] indices = meshUtils.createIndiceArray();  // Not used!!
 
+        // Initialized everything and load new GridItem into gridItem list
         Mesh mesh = new Mesh(positions, colours, indices, tileSize);
         GridItem gridItem = new GridItem(mesh);
         gridItem.setPosition(0, 0, -2);
@@ -73,21 +67,21 @@ public class DummyGame implements IGameLogic {
         displxInc = 0;
         displzInc = 0;
         scaleInc = 0;
-        if (window.isKeyPressed(GLFW_KEY_UP)) {
+        if (window.isKeyPressed(GLFW_KEY_UP)) { // Move map up
             displyInc = 1;
-        } else if (window.isKeyPressed(GLFW_KEY_DOWN)) {
+        } else if (window.isKeyPressed(GLFW_KEY_DOWN)) {    // Move map down
             displyInc = -1;
-        } else if (window.isKeyPressed(GLFW_KEY_LEFT)) {
+        } else if (window.isKeyPressed(GLFW_KEY_LEFT)) {    // Move map left
             displxInc = -1;
-        } else if (window.isKeyPressed(GLFW_KEY_RIGHT)) {
+        } else if (window.isKeyPressed(GLFW_KEY_RIGHT)) {   // Move map right
             displxInc = 1;
-        } else if (window.isKeyPressed(GLFW_KEY_A)) {
+        } else if (window.isKeyPressed(GLFW_KEY_A)) {   // Zoom out
             displzInc = -1;
-        } else if (window.isKeyPressed(GLFW_KEY_Q)) {
+        } else if (window.isKeyPressed(GLFW_KEY_Q)) {   // Zoom in
             displzInc = 1;
-        } else if (window.isKeyPressed(GLFW_KEY_Z)) {
+        } else if (window.isKeyPressed(GLFW_KEY_Z)) {   // Decrease scale
             scaleInc = -1;
-        } else if (window.isKeyPressed(GLFW_KEY_X)) {
+        } else if (window.isKeyPressed(GLFW_KEY_X)) {   // Increase scale
             scaleInc = 1;
         }
     }
@@ -95,11 +89,9 @@ public class DummyGame implements IGameLogic {
     @Override
     public void update(float interval) {
 
-
-
-
         for (GridItem gridItem : gridItems) {
             float scale = gridItem.getScale();
+
             // Update position
             Vector3f itemPos = gridItem.getPosition();
             float posx = itemPos.x + displxInc * (scale * 0.01f);
@@ -113,13 +105,6 @@ public class DummyGame implements IGameLogic {
                 scale = 0;
             }
             gridItem.setScale(scale);
-            
-            // Update rotation angle
-//            float rotation = gridItem.getRotation().z + 1.5f;
-//            if ( rotation > 360 ) {
-//                rotation = 0;
-//            }
-//            gridItem.setRotation(0, 0, rotation);
         }
     }
 
@@ -134,6 +119,14 @@ public class DummyGame implements IGameLogic {
         for (GridItem gridItem : gridItems) {
             gridItem.getMesh().cleanUp();
         }
+    }
+
+    public int getNumTilesX() {
+        return numTilesX;
+    }
+
+    public int getNumTilesY() {
+        return numTilesY;
     }
 
 }

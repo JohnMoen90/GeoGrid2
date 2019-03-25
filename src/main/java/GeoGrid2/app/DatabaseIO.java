@@ -1,4 +1,4 @@
-package GeoGrid2.game;
+package GeoGrid2.app;
 
 import GeoGrid2.engine.MapTile;
 
@@ -6,6 +6,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+
+/**
+ * This class is not finished!!
+ * The start of sqlite CRUD functionality
+ */
 
 public class DatabaseIO {
 

@@ -1,8 +1,13 @@
-package GeoGrid2.game;
+package GeoGrid2.app;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+/**
+ * Not implemented, ignore me!!
+ * Was going to be used for a settings initialization gui
+ */
 
 public class SettingsGUI extends JFrame {
     private JPanel mainPanel;

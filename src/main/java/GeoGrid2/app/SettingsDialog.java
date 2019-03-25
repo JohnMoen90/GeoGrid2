@@ -1,7 +1,13 @@
-package GeoGrid2.game;
+package GeoGrid2.app;
 
 import javax.swing.*;
 import java.awt.event.*;
+
+
+/**
+ * Not implemented, ignore me!!
+ * Was going to be used for a settings initialization dialog
+ */
 
 public class SettingsDialog extends JDialog {
     private JPanel contentPane;

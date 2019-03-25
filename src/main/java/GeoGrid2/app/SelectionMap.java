@@ -1,4 +1,4 @@
-package GeoGrid2.game;
+package GeoGrid2.app;
 
 import org.jxmapviewer.JXMapViewer;
 import org.jxmapviewer.OSMTileFactoryInfo;
@@ -9,6 +9,12 @@ import org.jxmapviewer.viewer.TileFactoryInfo;
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
+/**
+ * This is not implemented - was going to be used to create a long/lat selection map in the gui
+ * Pretty much
+ */
+
 
 public class SelectionMap {
 
@@ -21,7 +27,6 @@ public class SelectionMap {
     }
 
     public void init() {
-
 
         JXMapViewer mapViewer = new JXMapViewer();
 
@@ -36,17 +41,17 @@ public class SelectionMap {
         // Set the focus
         GeoPosition us = new GeoPosition(40, -98);
 
-        mapViewer.setZoom(10);
+        mapViewer.setZoom(10);  // <-- Not sure on the best value for this yet
         mapViewer.setAddressLocation(us);
 
         // Display the viewer in a JFrame
-        JFrame frame = new JFrame("JXMapviewer2 Example 1");
+        JFrame frame = new JFrame("Select Location to Visualize");
         frame.getContentPane().add(mapViewer);
         frame.setSize(800, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
 
-
+        // This simply doesn't work
         mapViewer.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 1 && e.getButton() == MouseEvent.BUTTON3) {

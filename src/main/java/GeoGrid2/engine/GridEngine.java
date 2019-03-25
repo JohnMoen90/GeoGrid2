@@ -1,7 +1,7 @@
 package GeoGrid2.engine;
 
 /**
- * This class manages the game thread, fps, and binding window with game logic
+ * This class manages the app thread, fps, and binding window with app app
  */
 
 public class GridEngine implements Runnable {
@@ -13,9 +13,9 @@ public class GridEngine implements Runnable {
     private final Thread geoGridLoopThread;
     private final Timer timer;
 
-    private final IGameLogic gameLogic;
+    private final IGridLogic gameLogic;
 
-    public GridEngine(String windowTitle, int width, int height, boolean vSync, IGameLogic gameLogic) throws Exception {
+    public GridEngine(String windowTitle, int width, int height, boolean vSync, IGridLogic gameLogic) throws Exception {
         geoGridLoopThread = new Thread(this, "GAME_LOOP_THREAD");
         window = new Window(windowTitle, width, height, vSync);
         this.gameLogic = gameLogic;
